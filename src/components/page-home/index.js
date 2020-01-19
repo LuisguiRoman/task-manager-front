@@ -3,12 +3,18 @@ import React, { useState } from 'react';
 
 //COMPONENTS
 import { FormRegister } from '../form-register';
+import { FormLogin } from '../form-login';
 
 // STYLES
 import './home.scss';
 
 export const Home = () =>{
     const [showLogin, setLogin] = useState(true);
+
+    const handlelogin = () =>{
+        console.log('fddfdfdffdfd')
+        setLogin(!showLogin);
+    }
 
     return (
         <div id="page-home" className="container">
@@ -17,14 +23,21 @@ export const Home = () =>{
 
                 <div className="row m-bottom-30">
                     <div className="input-field col-6">
-                        <button className={`waves-effect btn ${showLogin ? 'active':''}`} type="button">Ingresar</button>
+                        <button className={`waves-effect btn ${showLogin ? 'active':''}`} type="button"
+                                onClick={handlelogin}>Ingresar</button>
                     </div>
                     <div className="input-field col-6">
-                        <button className={`waves-effect btn ${showLogin ? '':'active'}`} type="button">Registrarse</button>
+                        <button className={`waves-effect btn ${showLogin ? '':'active'}`} type="button"
+                                onClick={handlelogin}>Registrarse</button>
                     </div>
                 </div>
 
-                <FormRegister />
+                {showLogin ? (
+                    <FormLogin />
+                ):(
+                    <FormRegister login={handlelogin} />
+                )}
+    
             </div>
         </div>
     );

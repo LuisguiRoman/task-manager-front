@@ -5,12 +5,12 @@ import M from 'materialize-css';
 import CryptoJS from 'crypto-js';
 
 // STYLES
-import './register.scss';
+import './login.scss';
 
 //constantes
 import { api_url, endpoints } from '../../constants';
 
-export const FormRegister = props =>{
+export const FormLogin = () =>{
     const [register, setRegister] = useState({
         name: '',
         user_name: '',
@@ -95,22 +95,16 @@ export const FormRegister = props =>{
     const handleSuccess = () =>{
         M.toast({ html: 'Usuario registrado con éxito', classes: 'success' });
         //Reiniciar campos de registro
-        setRegister({name: '', user_name: '', password: '', password_validation: ''});
-        props.login();
+        setRegister({username: '', password: ''});
     }
 
-    const {name, user_name, password, password_validation} = register;
+    const { username, password} = register;
 
     return (
         <form id="form-register" className="row" autoComplete="off" onSubmit={handleSubmit} noValidate>
             <div className="input-field col-12">
-                <input id="name" name="name" type="text" 
-                       value={name} onChange={handleChange} />
-                <label htmlFor="name" maxLength="100">Nombre</label>
-            </div>
-            <div className="input-field col-12">
                 <input id="user_name" name="user_name" type="email" 
-                       value={user_name} onChange={handleChange} />
+                       value={username} onChange={handleChange} />
                 <label htmlFor="user_name" maxLength="100">Email</label>
             </div>
             <div className="input-field col-12">
@@ -118,14 +112,9 @@ export const FormRegister = props =>{
                        value={password} onChange={handleChange} />
                 <label htmlFor="password" maxLength="20">Contraseña</label>
             </div>
-            <div className="input-field col-12">
-                <input id="password_validation" name="password_validation" type="password" pattern="[0-9a-zA-Z]"
-                       value={password_validation} onChange={handleChange} />
-                <label htmlFor="password_validation" maxLength="20">Confirmación</label>
-            </div>
             <div className="input-field col-12 text-center">
                 <button className="btn waves-effect" type="submit" disabled={disabled}>
-                    {disabled ? 'Registrando...': 'Registrarme'}
+                    {disabled ? 'Ingresando...': 'Ingresar'}
                 </button>
             </div>
         </form>
