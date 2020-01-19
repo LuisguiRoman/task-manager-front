@@ -1,0 +1,24 @@
+@import '../../styles/partials/variables';
+
+#page-home{
+    padding-top: 100px;
+    .main-home{
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+    h4{
+        color: $status-3;
+    }
+    button[type="button"]{
+        display: block;
+        width: 100%;
+        color: $color-general !important;
+        background-color: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid transparent !important;
+        &.active{
+            border-bottom: 1px solid $status-3 !important;
+        }
+    }
+}

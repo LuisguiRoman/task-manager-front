@@ -231,49 +231,21 @@ ul.list {
     }
 }
 
-#page{
-    //logo
-    &.home-page, &.registro, &.recuperar-contrasena, 
-    &.confirmacion, &.verificacion, &.mi-custom, &.preguntas{
-        #logo-top{
-            path{
-                fill: white;
-            }
-        }
-    }
-    //breadcrum
-    &.preguntas{
-        .breadcrumbs{
-            li{
-                color: white;
-            }
-        }
-    }
-    //menu usuario
-    &.mi-custom, &.preguntas{
-        #user-navigation{
-            svg path{
-                fill: white;
-            }
-            .user-name{
-                color: white;
-                
-                strong:after{
-                    border-top: 7px solid white;
-                }
-            }
-        }
-    }
-}
-
 .btn {
     padding: 8px 30px;
     border-radius: 0;
     font-size: 0.9rem;
     cursor: pointer;
     display: inline-block;
-    color: $color-general;
-    background: white;
+    color: white;
+    background: $status-3;
+    border: 1px solid $status-3;
+    &:hover,
+    &:focus,
+    &:active{
+        color: $status-3;
+        background: white;
+    }
     &.disable {
         cursor: no-drop;
     }
@@ -291,19 +263,8 @@ ul.list {
 .m-top-40 {
     margin-top: 40px;
 }
-
-.iframe-wrap {
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
+.m-bottom-30 {
+    margin-bottom: 30px;
 }
 
 .alert-box {
@@ -383,234 +344,6 @@ table {
         }
     }
 }
-
-.breadcrumbs{
-    position: absolute;
-    top: 130px; 
-    left: 75px;
-    z-index: 5;
-    @media screen and (max-width: $landscape) {
-        top: 90px;
-    }
-    @media screen and (max-width: $mobile) {
-        display: none;
-    }
-    li{
-        display: inline-block;
-        vertical-align: middle;
-        color: $color-general;
-        &:after{
-            content: '/';
-            display: inline-block;
-            vertical-align: middle;
-            color: inherit;
-            font-size: 0.7rem;
-            margin: 0 3px;
-        }
-        &:last-child:after{
-            display: none;
-        }
-        a, span{
-            color: inherit;
-            font-size: 0.7rem;
-        }
-    }
-}
-
-.banner-background {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    picture, img{
-        display: block;
-        width: 100%;
-    }
-}
-
-//general
-#safetti-custom {
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    @media screen and (min-width: $mobile) {
-        min-height: 617px;
-        min-height: 100vh;
-    }
-}
-
-#primary {
-    position: relative;
-    @media screen and (min-width: $mobile) {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-}
-
-.safetti-wrapper {
-    position: relative;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @media screen and (min-width: $mobile) {
-        height: 100%;
-        min-height: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-}
-
-.page {
-    width: 100%;
-    transition: all .4s;
-    @media screen and (min-width: $mobile) {
-        position: absolute;
-        left: 0;
-        right: 0;
-        min-height: 100%;
-    }
-    &.page-active {
-        opacity: 0;
-        @media screen and (min-width: $mobile) {
-            transform: scale(1);
-        }
-    }
-    &.page-enter {
-        opacity: 0;
-        @media screen and (min-width: $mobile) {
-            transform: scale(1.1);
-        }
-    }
-    &.page-enter-done {
-        opacity: 1;
-    }
-    &.page-exit {
-        opacity: 1;
-        @media screen and (min-width: $mobile) {
-            position: absolute;
-            top: 0;
-            z-index: -1;
-        }
-    }
-    &.page-exit-active {
-        opacity: 0;
-        @media screen and (min-width: $mobile) {
-            position: absolute;
-            top: 0;
-            z-index: -1;
-            transform: scale(0.9);
-        }
-    }
-}
-
-
-.contaner-left {
-    @media screen and (min-width: $mobile) {
-        margin-left: 70px;
-    }
-}
-
-
-
-.ril-toolbar, .ril__toolbar{
-    background-color: transparent !important;
-}
-.ril__navButtonPrev, .ril__navButtonNext, .ril__closeButton{
-    font-family: 'safetti';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    background: none !important;
-}
-
-.ril__navButtonPrev:after{
-    content: "\e901";
-    color: white;
-    font-size: 2rem;
-    @media screen and (max-width: $mobileMedium) {
-        color: $color-general;
-    }
-}
-.ril__navButtonNext:after{
-    content: "\e900";
-    color: white;
-    font-size: 2rem;
-    @media screen and (max-width: $mobileMedium) {
-        color: $color-general;
-    }
-}
-
-.ril__closeButton:after{
-    content: "x";
-    font-family: $font-general;
-    color: white;
-    font-size: 2rem;
-}
-
-.total-bar{
-    width: 100%;
-    background: white;
-    padding: 30px 0 50px 0;
-    .contanier-moldes{
-        margin-top: 0;
-        padding: 0;
-    }
-    .wrap-total{
-        border-bottom: 1px solid $color-general;
-        @media screen and (max-width: $mobile) {
-            width: 98%;
-            margin: auto;
-        }
-        h3{
-            margin-bottom: 0;
-            font-size: 1.1rem;
-        }
-        .total-number{
-            font-size: 1.5rem;
-            @media screen and (max-width: $mobileSmall) {
-                font-size: 1.2rem;
-            }
-        }
-        p{
-            margin-bottom: 5px;
-        }
-    }
-    .btn-finish-cart{
-        display: flex;
-        @media screen and (max-width: $mobile) {
-            display: block;
-            text-align: center;
-            padding-bottom: 20px;
-            padding-top: 20px;
-        }
-        button{
-            align-self: flex-end;
-        }
-    }
-}
-
-.back-home{
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    z-index: 5;
-    &.color-white{
-        color: white;
-    }
-    @media screen and (max-width: $landscape) {
-        top: 60px;
-    }
-    @media screen and (max-width: $mobile) {
-        color: white;
-        left: 20px;
-        top: -120px;
-    }
-}
-
 
 ::-moz-selection {
     color: #ffffff;
