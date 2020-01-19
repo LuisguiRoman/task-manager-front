@@ -38,29 +38,19 @@ export class AppProvider extends Component {
             .catch(error => {
                 console.log(error, error.response);
                 //this.handleLogout();
-                //this.handlePreload(false);
             });
-        }else{
-            //this.handlePreload(false);
         }
     }
 
     setAppState = data =>{
         this.setState({
-            user_name: data.user.auth_user_informations[0].name,
-        }, ()=>{
-            this.handlePreload(false);
+            logged_in: true,
+            user_name: data.user.user_name
         });
-    }
-
-    handlePreload = preload =>{
-        this.setState({preload});
     }
 
     newAppState = (name, value, callBack)=>{
         this.setState({[name]: value}, ()=>{
-            //ejecutar callback si se tiene uno
-            console.log('New app state:', this.state);
             if(callBack !== undefined) callBack();
         });
     }

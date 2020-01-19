@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/main.scss';
 
 //CONTEXT
 import { AppProvider } from './context';
