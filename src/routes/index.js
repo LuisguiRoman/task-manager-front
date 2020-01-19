@@ -14,7 +14,6 @@ export const Routes = ({ route }) =>{
 
     useEffect(()=>{
         let body = document.getElementById('page');
-        console.log(body);
         body.className = '';
         if(route.pathname.substr(1) !== ''){
             body.classList.add(route.pathname.substr(1));

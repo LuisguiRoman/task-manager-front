@@ -15,7 +15,8 @@ export class AppProvider extends Component {
         super();
         this.state = {
             logged_in: false,
-            user_name: '',
+            done: false,
+            name: '',
         };
     }
     
@@ -33,20 +34,22 @@ export class AppProvider extends Component {
                 headers: { 'Authorization': `Bearer ${auth_token}` }
             })
             .then(res => {
-                console.log('Sesión: ', res.data);
+                //console.log('Sesión: ', res.data);
                 this.setAppState(res.data.data);
             })
             .catch(error => {
                 console.log(error, error.response);
-                //this.handleLogout();
             });
+        }else{
+            this.setState({done: true});
         }
     }
 
     setAppState = data =>{
         this.setState({
+            done: true,
             logged_in: true,
-            user_name: data.user.user_name
+            name: data.user.name
         });
     }
 

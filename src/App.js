@@ -1,6 +1,9 @@
 // DEPENDENCIES
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+//CONTEXT
+import { AppContext } from './context';
 
 //ROUTES
 import { Routes } from './routes';
@@ -9,10 +12,16 @@ import { Routes } from './routes';
 import './styles/main.scss';
 
 const App = ()=>{
+    const { app_state: {done} } = useContext(AppContext);
+
     return (
-        <Router>
-            <Route render={({ location }) => <Routes route={location} />} />
-        </Router>
+        <Fragment>
+            {done && (
+                <Router>
+                    <Route render={({ location }) => <Routes route={location} />} />
+                </Router>
+            )}
+        </Fragment>
     );
 }
 
