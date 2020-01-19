@@ -1,7 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/main.scss';
+
+//CONTEXT
+import { AppProvider } from './context';
+
+//styles
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Evolution =()=>{
+    return(
+        <AppProvider>
+            <App />
+        </AppProvider>
+    );
+}
+
+ReactDOM.render(<Evolution />, document.getElementById('root'));
 
