@@ -77,9 +77,7 @@ export const FormRegister = props =>{
         };
 
         axios
-            .post(`${api_url}${endpoints.user}/create`, DATA, {
-                headers: { 'from-url': `${window.location.origin}/confirmacion` }
-            })
+            .post(`${api_url}${endpoints.user}/create`, DATA)
             .then(res => {
                 console.log(res.data);
                 setDisabled(false);
@@ -94,8 +92,6 @@ export const FormRegister = props =>{
 
     const handleSuccess = () =>{
         M.toast({ html: 'Usuario registrado con éxito', classes: 'success' });
-        //Reiniciar campos de registro
-        setRegister({name: '', user_name: '', password: '', password_validation: ''});
         props.login();
     }
 

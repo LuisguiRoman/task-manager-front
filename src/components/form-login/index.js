@@ -11,11 +11,9 @@ import './login.scss';
 import { api_url, endpoints } from '../../constants';
 
 export const FormLogin = () =>{
-    const [register, setRegister] = useState({
-        name: '',
-        user_name: '',
-        password: '',
-        password_validation: ''
+    const [login, setLogin] = useState({
+        username: '',
+        password: ''
     });
     const [disabled, setDisabled] = useState(false);
 
@@ -24,8 +22,8 @@ export const FormLogin = () =>{
     }, []);
 
     const handleChange = event =>{
-        setRegister({
-            ...register,
+        setLogin({
+            ...login,
             [event.target.name]: event.target.value
         });
     }
@@ -34,56 +32,48 @@ export const FormLogin = () =>{
         event.preventDefault();
         const valid = handleValidate();
         if(valid){
-            handleRegister();
+            handleLogin();
         }
     }
 
     const handleValidate = () =>{
-        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(register.user_name);
-        const pass_validate = /^[0-9a-zA-Z]+$/.test(register.password);
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(login.username);
+        const pass_validate = /^[0-9a-zA-Z]+$/.test(login.password);
 
-        if (register.name === '' || register.user_name === '' || register.password === '' || register.password_validation === '') {
+        if (login.username === '' || login.password === '') {
             M.Toast.dismissAll();
             M.toast({ html: 'Completa todos los campos', classes: 'error'});
             return false;
         }
-        if (register.user_name === '' || !emailValid) {
+        if (login.username === '' || !emailValid) {
             M.Toast.dismissAll();
             M.toast({ html: 'Correo no válido', classes: 'error'});
             return false;
         }
-        if (register.password !== register.password_validation) {
+        if (!pass_validate) {
             M.Toast.dismissAll();
-            M.toast({ html: 'Las contraseñas no coinciden', classes: 'error'});
-            return false;
-        }
-        if (!pass_validate || ( register.password.length > 20 || register.password.length < 8 )) {
-            M.Toast.dismissAll();
-            M.toast({ html: 'No debe contener caracteres especiales, Mínimo 8 y máximo 20', classes: 'error'});
+            M.toast({ html: 'Contraseña no válida', classes: 'error'});
             return false;
         }
         return true;
     }
 
-    const handleRegister = () =>{
+    const handleLogin = () =>{
         setDisabled(true);
-        const hash     = CryptoJS.SHA256(register.password);
+        const hash     = CryptoJS.SHA256(login.password);
         const password = hash.toString(CryptoJS.enc.Hex);
 
         const DATA = {
-            name: register.name,
-            username: register.user_name,
+            username: login.username,
             password
         };
 
         axios
-            .post(`${api_url}${endpoints.user}/create`, DATA, {
-                headers: { 'from-url': `${window.location.origin}/confirmacion` }
-            })
+            .post(`${api_url}${endpoints.login}`, DATA)
             .then(res => {
-                console.log(res.data);
-                setDisabled(false);
-                handleSuccess();
+                //Redirigir al dashboard
+                localStorage.setItem('user_tk', res.data.data.token);
+                window.location.href = '/dashboard';
             })
             .catch(error => {
                 console.log(error, error.response);
@@ -92,20 +82,14 @@ export const FormLogin = () =>{
             });
     }
 
-    const handleSuccess = () =>{
-        M.toast({ html: 'Usuario registrado con éxito', classes: 'success' });
-        //Reiniciar campos de registro
-        setRegister({username: '', password: ''});
-    }
-
-    const { username, password} = register;
+    const { username, password } = login;
 
     return (
-        <form id="form-register" className="row" autoComplete="off" onSubmit={handleSubmit} noValidate>
+        <form id="form-login" className="row" autoComplete="off" onSubmit={handleSubmit} noValidate>
             <div className="input-field col-12">
-                <input id="user_name" name="user_name" type="email" 
+                <input id="username" name="username" type="email" 
                        value={username} onChange={handleChange} />
-                <label htmlFor="user_name" maxLength="100">Email</label>
+                <label htmlFor="username" maxLength="100">Email</label>
             </div>
             <div className="input-field col-12">
                 <input id="password" name="password" type="password" pattern="[0-9a-zA-Z]"
