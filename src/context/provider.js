@@ -14,6 +14,7 @@ export class AppProvider extends Component {
     constructor() {
         super();
         this.state = {
+            logged_in: false,
             user_name: '',
         };
     }

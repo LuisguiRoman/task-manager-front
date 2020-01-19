@@ -7,8 +7,8 @@ import { PrivateRoute } from './private-route';
 import { PublicRoute } from './public-route';
 
 // PAGES
-import Home from '../components/page-home';
-import Dashboard from '../components/page-dashboard';
+import { Home } from '../components/page-home';
+import { Dashboard } from '../components/page-dashboard';
 
 export const Routes = ({ route }) =>{
 

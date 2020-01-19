@@ -10,11 +10,9 @@ import './styles/main.scss';
 
 const App = ()=>{
     return (
-        <div id="primary">
-            <Router>
-                <Route render={({ location }) => <Routes route={location} />} />
-            </Router>
-        </div>
+        <Router>
+            <Route render={({ location }) => <Routes route={location} />} />
+        </Router>
     );
 }
 
