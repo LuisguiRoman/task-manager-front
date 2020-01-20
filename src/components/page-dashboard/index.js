@@ -118,10 +118,12 @@ export class Dashboard extends Component {
                 </header>
     
                 <div id="page-dashboard" className="container">
-                    {this.state.tasks.length > 0 && (
+                    {this.state.tasks.length > 0 ? (
                         <TasksWrapper tasks={this.state.tasks}
-                                      update={this.handleUpdateTask}
-                                      remove={this.handleDeleteTask} />
+                            update={this.handleUpdateTask}
+                            remove={this.handleDeleteTask} />
+                    ): (
+                        <h2 className="first-task-title">¡Hora de crear tu primer tarea!</h2>
                     )}
                 </div>
     

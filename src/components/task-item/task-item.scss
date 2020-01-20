@@ -15,6 +15,9 @@
         color: $gray;
         small{
             color: inherit;
+            &.expired-date{
+                color: red;
+            }
         }
     }
     .remove-task{
