@@ -59,6 +59,42 @@ export class Dashboard extends Component {
         this.setState({tasks: new_task_list});
     }
 
+    handleUpdateTask = task =>{
+        axios
+            .patch(`${api_url}${endpoints.tasks}/update`, {...task}, {
+                headers: { 'Authorization': `Bearer ${auth_token}` }
+            })
+            .then(res => {
+                console.log(res.data);
+                M.toast({html: 'Prioridad actualizada!', classes: 'success'});
+            })
+            .catch(error => {
+                console.log(error, error.response);
+            });
+    }
+
+    handleDeleteTask = task =>{
+        const tasks_copy = this.state.tasks;
+        const task_index = tasks_copy.map(task => task._id).indexOf(task.task_id);
+
+        axios
+            .delete(`${api_url}${endpoints.tasks}/remove`, {
+                headers: { Authorization: `Bearer ${auth_token}`},
+                data: { ...task }
+            })
+            .then(res => {
+                //console.log(res.data);
+                //Eliminar del arrary
+                tasks_copy.splice(task_index, 1);
+                this.setState({tasks: tasks_copy});
+                M.toast({html: 'Tarea eliminada!', classes: 'success'});
+            })
+            .catch(error => {
+                M.toast({html: 'Ocurrio un error!', classes: 'error'});
+                console.log(error, error.response);
+            });
+    }
+
     render(){
         //Descomponer el contexto y obtener las propiedades
         const { app_state: {name}, app_logout } = this.context;
@@ -83,7 +119,9 @@ export class Dashboard extends Component {
     
                 <div id="page-dashboard" className="container">
                     {this.state.tasks.length > 0 && (
-                        <TasksWrapper tasks={this.state.tasks} />
+                        <TasksWrapper tasks={this.state.tasks}
+                                      update={this.handleUpdateTask}
+                                      remove={this.handleDeleteTask} />
                     )}
                 </div>
     

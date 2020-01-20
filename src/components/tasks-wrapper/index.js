@@ -10,7 +10,7 @@ import { TasksColumn } from '../task-column';
 import './tasks-wrapper.scss';
 
 
-export const TasksWrapper = ({tasks}) =>{
+export const TasksWrapper = ({tasks, update, remove}) =>{
     let priority_1 = [], priority_2 = [], priority_3 = [];
     //Reordenar tareas
     tasks.forEach(task => {
@@ -29,19 +29,24 @@ export const TasksWrapper = ({tasks}) =>{
         dragula([document.getElementById('column_1'), document.getElementById('column_2'), document.getElementById('column_3')])
             .on('drop', (el)=>{
                 el.className += ' ex-moved';
-                updatePriority(el.parentNode);
+                updatePriority(el, el.parentNode);
             })
     }, []);
 
-    const updatePriority = column =>{
+    const updatePriority = (task, column) =>{
+        const current_priority  = task.getAttribute('data-p');
         const priority = column.getAttribute('data-priority');
-        console.log(priority);
+        const user_id  = task.getAttribute('data-u');
+        const task_id  = task.id;
+        if(current_priority !== priority){
+            update({priority: parseInt(priority), user_id, task_id});
+        }
     }
 
     return (
         <div id="tasks-wrapper" className="row">
             {columns.map((column, index)=>(
-                <TasksColumn key={`colum_${column.id}_${index}`} column={column} />
+                <TasksColumn key={`colum_${column.id}_${index}`} column={column} remove={remove} />
             ))}
         </div>
     );
