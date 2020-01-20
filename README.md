@@ -1,9 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Comando para iniciar el proyecto
-### `npm start`
+## Instalación 
 
-**Se debe crear un archivo ".env" con los siguientes datos:**
+## `npm install`
+
+## Ejecutar el proyecto 
+
+## `npm start`
+
+**Se debe crear un archivo ".env" en la raiz del proyecto con los siguientes datos:**
 
 PORT=3001
 
