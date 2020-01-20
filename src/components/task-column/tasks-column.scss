@@ -4,10 +4,12 @@
     & > div{
         border: 1px solid $gray;
         padding-bottom: 20px;
+        padding-top: 20px;
     }
     h4{
         text-align: center;
         padding: 5px 0;
+        margin-bottom: 0;
     }
     .priority-1{
         color: white;

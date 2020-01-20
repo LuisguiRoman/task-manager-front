@@ -1,11 +1,10 @@
 // DEPENDENCIES
-import React, { useState } from 'react';
-
+import React from 'react';
 
 // STYLES
 import './task-item.scss';
 
-export const TaskItem = ({task, index}) =>{
+export const TaskItem = ({task}) =>{
     const formatDate = date =>{
         let d = new Date(date);
         let n = d.toLocaleDateString();

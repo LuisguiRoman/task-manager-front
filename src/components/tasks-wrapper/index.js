@@ -1,5 +1,7 @@
 // DEPENDENCIES
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import dragula from 'dragula';
+import axios from 'axios';
 
 //COMPONENTS
 import { TasksColumn } from '../task-column';
@@ -21,6 +23,20 @@ export const TasksWrapper = ({tasks}) =>{
         { id: 'column_2', title: 'Prioridad Media', priority: 2, tasks: priority_2 },
         { id: 'column_3', title: 'Prioridad Baja', priority: 3, tasks: priority_3 }
     ];
+
+    useEffect(()=>{
+        //Eeventos drag and drop
+        dragula([document.getElementById('column_1'), document.getElementById('column_2'), document.getElementById('column_3')])
+            .on('drop', (el)=>{
+                el.className += ' ex-moved';
+                updatePriority(el.parentNode);
+            })
+    }, []);
+
+    const updatePriority = column =>{
+        const priority = column.getAttribute('data-priority');
+        console.log(priority);
+    }
 
     return (
         <div id="tasks-wrapper" className="row">

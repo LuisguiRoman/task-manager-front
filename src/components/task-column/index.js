@@ -1,5 +1,5 @@
 // DEPENDENCIES
-import React, { useState } from 'react';
+import React from 'react';
 
 //COMPONENTS
 import { TaskItem } from '../task-item';
@@ -9,13 +9,10 @@ import './tasks-column.scss';
 
 
 export const TasksColumn = ({column}) =>{
-    
-
     return (
-        <div id={column.id} className="tasks-column col-12 col-lg-4">
-            <div>
-                <h4 className={`priority-${column.priority}`}>{column.title}</h4>
-
+        <div className="tasks-column col-12 col-lg-4">
+            <h4 className={`priority-${column.priority}`}>{column.title}</h4>
+            <div id={column.id} data-priority={column.priority}>
                 {column.tasks.map((task, index)=>(
                       <TaskItem key={`task-${task._id}`} task={task} />
                 ))}
