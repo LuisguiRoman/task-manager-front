@@ -1,7 +1,6 @@
 // DEPENDENCIES
 import React, { useEffect } from 'react';
 import dragula from 'dragula';
-import axios from 'axios';
 
 //COMPONENTS
 import { TasksColumn } from '../task-column';
