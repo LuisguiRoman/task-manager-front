@@ -39,6 +39,7 @@ export class AppProvider extends Component {
             })
             .catch(error => {
                 console.log(error, error.response);
+                this.handleLogout();
             });
         }else{
             this.setState({done: true});
