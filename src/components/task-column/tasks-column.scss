@@ -1,0 +1,24 @@
+@import '../../styles/partials/variables';
+
+.tasks-column{
+    & > div{
+        border: 1px solid $gray;
+        padding-bottom: 20px;
+    }
+    h4{
+        text-align: center;
+        padding: 5px 0;
+    }
+    .priority-1{
+        color: white;
+        background-color: $status-1;
+    }
+    .priority-2{
+        color: white;
+        background-color: $status-2;
+    }
+    .priority-3{
+        color: white;
+        background-color: $status-3;
+    }
+}

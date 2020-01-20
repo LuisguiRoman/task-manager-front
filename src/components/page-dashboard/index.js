@@ -2,7 +2,6 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 //CONTEXT
 import { AppContext } from '../../context';
@@ -12,16 +11,20 @@ import { api_url, endpoints, auth_token } from '../../constants';
 
 //COMPONENTS
 import { FormTasks } from '../form-tasks';
+import { TasksWrapper } from '../tasks-wrapper';
 
 // STYLES
 import './dashboad.scss';
 
+
 export const Dashboard = () =>{
-    //Descomponer el contexto y obtener las propiedades
-    const { app_state: {name}, app_logout } = useContext(AppContext);
-    
     //Estado inicial
     const [tasks, setTasks] = useState([]);
+
+    //Descomponer el contexto y obtener las propiedades
+    const { app_state: {name}, app_logout } = useContext(AppContext);
+    //obtener la primera palabra del string
+    const first_name = name.replace(/ .*/,'');
 
     useEffect(()=>{
         let elems = document.querySelectorAll('.modal');
@@ -35,13 +38,11 @@ export const Dashboard = () =>{
                 headers: { 'Authorization': `Bearer ${auth_token}` }
             })
             .then(res => {
-                //Redirigir al dashboard
                 console.log(res.data.data.tasks);
                 setTasks(res.data.data.tasks);
             })
             .catch(error => {
                 console.log(error, error.response);
-                //M.toast({ html: 'Ocurrio un error', classes: 'error' });
             });
     }
 
@@ -52,13 +53,10 @@ export const Dashboard = () =>{
     }
 
     const handleAddTask = new_task =>{
-        const task_list = tasks;
-        task_list.push(new_task);
-        setTasks(task_list);
+        const new_task_list = tasks;
+        new_task_list.push(new_task);
+        setTasks(new_task_list);
     }
-
-    //obtener la primera palabra del string
-    const first_name = name.replace(/ .*/,'');
 
     return (
         <Fragment>
@@ -66,7 +64,7 @@ export const Dashboard = () =>{
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-7">
-                            <h2>Hola {first_name}!</h2>
+                            <h2>¡Hola {first_name}!</h2>
                         </div>
                         <div className="col-12 col-lg-5 text-right">
                             <button type="button" className="btn waves-effect" onClick={showModal}>Crear tarea</button>
@@ -77,6 +75,9 @@ export const Dashboard = () =>{
             </header>
 
             <div id="page-dashboard" className="container">
+                {tasks.length > 0 && (
+                    <TasksWrapper tasks={tasks} />
+                )}
             </div>
 
             <FormTasks addTask={handleAddTask} />

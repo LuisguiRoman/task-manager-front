@@ -34,8 +34,6 @@ export const FormTasks = props =>{
     }
 
     const handleValidate = () =>{
-        console.log(create);
-
         if(create.name === '' || create.priority === '' || create.date === ''){
             M.Toast.dismissAll();
             M.toast({ html: 'Completa todos los campos', classes: 'error'});
@@ -52,8 +50,6 @@ export const FormTasks = props =>{
             priority: parseInt(create.priority),
             expiration_date: new Date(create.date)
         };
-
-        console.log(DATA);
 
         axios
             .post(`${api_url}${endpoints.tasks}/create`, DATA, {
