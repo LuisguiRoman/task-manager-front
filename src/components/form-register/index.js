@@ -57,9 +57,9 @@ export const FormRegister = props =>{
             M.toast({ html: 'Las contraseñas no coinciden', classes: 'error'});
             return false;
         }
-        if (!pass_validate || ( register.password.length > 20 || register.password.length < 8 )) {
+        if (!pass_validate || ( register.password.length > 20 || register.password.length < 6 )) {
             M.Toast.dismissAll();
-            M.toast({ html: 'No debe contener caracteres especiales, Mínimo 8 y máximo 20', classes: 'error'});
+            M.toast({ html: 'La contraseña no debe contener caracteres especiales, Mínimo 6 y máximo 20', classes: 'error'});
             return false;
         }
         return true;
