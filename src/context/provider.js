@@ -54,12 +54,6 @@ export class AppProvider extends Component {
         });
     }
 
-    newAppState = (name, value, callBack)=>{
-        this.setState({[name]: value}, ()=>{
-            if(callBack !== undefined) callBack();
-        });
-    }
-
     handleLogout = () =>{
         localStorage.clear();//limpiar el local storage
         window.location.href = '/';//redireccionar al inicio
@@ -68,8 +62,7 @@ export class AppProvider extends Component {
     render() {
         const PROVIDER = {
             app_state: this.state,
-            app_logout: this.handleLogout,
-            app_new_state: this.newAppState
+            app_logout: this.handleLogout
         }
         
         return (

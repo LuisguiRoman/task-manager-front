@@ -7,7 +7,7 @@ import { AppProvider } from './context';
 //styles
 import App from './App';
 
-const Evolution =()=>{
+const TaskManager =()=>{
     return(
         <AppProvider>
             <App />
@@ -15,5 +15,5 @@ const Evolution =()=>{
     );
 }
 
-ReactDOM.render(<Evolution />, document.getElementById('root'));
+ReactDOM.render(<TaskManager />, document.getElementById('root'));
 

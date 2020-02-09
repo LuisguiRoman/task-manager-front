@@ -16,9 +16,7 @@ export const PrivateRoute = ({ routeKey, component: Component, ...rest }) => {
 
     if( !logged_in || ( auth_token === null || auth_token === undefined || auth_token === '' ) ){
         //si no esta autenticado
-        function logOut(){
-            app_logout();
-        }logOut();
+        app_logout();
     }
 
     return (
